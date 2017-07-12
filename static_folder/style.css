@@ -1,0 +1,54 @@
+html, body{ 
+  width:100%;
+}
+
+
+#sidebar {
+	
+	
+	width:	25%;
+
+
+	float: left;
+	
+	text-align: center;
+	background-color: grey;
+	
+}
+
+#content {
+
+
+	background-color: lightgrey;
+	margin-left: 25%;
+
+}
+#textbox {
+
+	width: 400px;
+	height: 400px;
+	font-size: 20;
+	margin-left: 35%;
+
+}
+
+#form {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+ul {
+    list-style-type: none;
+    margin: 10;
+    padding-left: 0px;
+    border: 1px solid #555;
+}
+
+li {
+	border-bottom: 1px solid #555;
+}
+
+li:hover {
+    background-color: #555;
+    color: white;
+}
