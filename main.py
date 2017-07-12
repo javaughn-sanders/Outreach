@@ -43,5 +43,5 @@ app = webapp2.WSGIApplication([
     ('/', MainHandler),
     ('/contacts', ContactsHandler),
     ('/help', HelpHandler),
-    ('/settings' SettingHandler),
+    ('/settings', SettingHandler),
 ], debug=True)
