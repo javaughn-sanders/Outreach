@@ -21,6 +21,8 @@ class people(ndb.Model):
 
 class text(ndb.Model):
 	feed = ndb.StringProperty()
+	reciever = ndb.StringProperty()
+	
 
 class MainHandler(webapp2.RequestHandler):
 	def get(self):
@@ -47,7 +49,9 @@ class ContactsHandler(webapp2.RequestHandler):
 		template = jinja_environment.get_template('contacts.html')
 		self.response.write(template.render())
 
-	
+	def post(self):
+		name_from_form = self.request.get('Contact_name')
+
 
 
 class ManageHandler(webapp2.RequestHandler):
