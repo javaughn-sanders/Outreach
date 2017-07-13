@@ -24,7 +24,17 @@ class MainHandler(webapp2.RequestHandler):
 		self.response.write(template.render()) 
 
 	def post(self):
-		feed_from_form = self.response.get('Post')
+		feed_from_form = self.request.get('Message')
+
+		feed_model = text(feed=feed_from_form)
+		feed_model.put()
+
+		template = jinja_environment.get_template('main_out.html')
+		self.response.write(template.render(
+			{
+				'text': feed_from_form 
+			}
+			))
 
 class ContactsHandler(webapp2.RequestHandler):
 	def get(self):
