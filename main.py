@@ -12,8 +12,8 @@ jinja_environment = jinja2.Environment(
 
 class people(ndb.Model):
 	name = ndb.StringProperty()
-	number = nbd.IntergerProperty()
-	email = nbd.StringProperty()
+	number = ndb.IntegerProperty()
+	email = ndb.StringProperty()
 
 class text(ndb.Model):
 	feed = ndb.StringProperty()
@@ -31,7 +31,7 @@ class ContactsHandler(webapp2.RequestHandler):
 		template = jinja_environment.get_template('contacts.html')
 		self.response.write(template.render())
 
-	def post(self):
+	
 
 
 class ManageHandler(webapp2.RequestHandler):
