@@ -13,6 +13,7 @@ handlers:
   static_dir: static_folder
 
 - url: .*
+  login: required
   script: main.app
 
 
