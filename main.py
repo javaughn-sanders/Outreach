@@ -7,6 +7,9 @@ import os
 
 from google.appengine.ext import ndb
 
+#Icons designed by Gregor Cresnar from Flaticon
+
+
 jinja_environment = jinja2.Environment(
 	loader=jinja2.FileSystemLoader(os.path.dirname(__file__)))
 
