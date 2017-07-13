@@ -16,27 +16,23 @@ class MainHandler(webapp2.RequestHandler):
 		template = jinja_environment.get_template('main.html')
 		self.response.write(template.render()) 
 
-
-
-
-
 class ContactsHandler(webapp2.RequestHandler):
 	def get(self):
 		template = jinja_environment.get_template('contacts.html')
 		self.response.write(template.render())
 
 class ManageHandler(webapp2.RequestHandler):
-	def get(template):
+	def get(self):
 		template = jinja_environment.get_template('manage.html')
 		self.response.write(template.render())
 
 class HelpHandler(webapp2.RequestHandler):
-	def get(template):
+	def get(self):
 		template = jinja_environment.get_template('help.html')
 		self.response.write(template.render())
 
 class SettingHandler(webapp2.RequestHandler):
-	def get(template):
+	def get(self):
 		template = jinja_environment.get_template('settings.html')
 		self.response.write(template.render())
 
