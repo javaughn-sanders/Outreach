@@ -10,16 +10,29 @@ from google.appengine.ext import ndb
 jinja_environment = jinja2.Environment(
 	loader=jinja2.FileSystemLoader(os.path.dirname(__file__)))
 
+class people(ndb.Model):
+	name = ndb.StringProperty()
+	number = nbd.IntergerProperty()
+	email = nbd.StringProperty()
+
+class text(ndb.Model):
+	feed = ndb.StringProperty()
 
 class MainHandler(webapp2.RequestHandler):
 	def get(self):
 		template = jinja_environment.get_template('main.html')
 		self.response.write(template.render()) 
 
+	def post(self):
+		feed_from_form = self.response.get('Post')
+
 class ContactsHandler(webapp2.RequestHandler):
 	def get(self):
 		template = jinja_environment.get_template('contacts.html')
 		self.response.write(template.render())
+
+	def post(self):
+
 
 class ManageHandler(webapp2.RequestHandler):
 	def get(self):
