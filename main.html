@@ -8,23 +8,27 @@
 	<body>
 		<div id='sidebar'>
 			<ul>
-				<li>Home</li>
-				<li>Contacts</li>
-				<li>Manage</li>
+				<li><img src="/resources/home.png"></li>
+				<li><img src="/resources/avatar.png"></li>
+				<li><img src="/resources/settings-1.png"></li>
+			
+			
+				<li><img src="/resources/settings.png"></li>
+				<li><img src="/resources/book.png"></li>
 			</ul>
-			<ul>
-				<li>Settings</li>
-				<li>Help</li>
-			</ul>
+		</div>
+
+		<div id='topbar'>
+			<p>OutREACH</p>
 		</div>
 
 		<div id='content'>
 			<h3>
 				New Message
 			</h3>
-	    	<form method="POST" action="/">
+	    	<form id="form" method="POST" action="/">
 	    		<textarea id='textbox'  name="Message"></textarea>
-	    		<input type="Submit" value="Submit">
+	    		<input id="submitbutton" type="Submit" value="Submit">
 	    	</form>
 	    </div>	
 	</body>
