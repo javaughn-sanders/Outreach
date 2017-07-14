@@ -85,9 +85,9 @@ class ContactsHandler(webapp2.RequestHandler):
 		template = jinja_environment.get_template('contact_imput.html')
 		self.response.write(template.render(
 			{
-				'username':username_from_form
-				'phone_number':phone_number_from_form
-				'email':email_from_form
+				'username': username_from_form
+				##'phone_number': phone_number_from_form
+				'email': email_from_form
 			}))
 
 
