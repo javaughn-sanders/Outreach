@@ -23,10 +23,10 @@ class text(ndb.Model):
 	feed = ndb.StringProperty()
 	receiver = ndb.StringProperty()
 	user = ndb.StringProperty()
+	timestamp = ndb.DateTimeProperty(auto_now_add=True)
 
 class MainHandler(webapp2.RequestHandler):
 	def get(self):
-
 		template = jinja_environment.get_template('main.html')
 		self.response.write(template.render())
 		 
@@ -67,7 +67,7 @@ class ManageHandler(webapp2.RequestHandler):
 	def get(self):
 		user = users.get_current_user()
 		user_email = user.email()
-		list_of_messages = text.query(text.receiver == user_email).fetch()
+		list_of_messages = text.query(text.receiver == user_email).order(-text.timestamp).fetch()
 
 		template = jinja_environment.get_template('manage.html')
 		self.response.write(template.render({
