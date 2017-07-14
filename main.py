@@ -21,26 +21,35 @@ class people(ndb.Model):
 
 class text(ndb.Model):
 	feed = ndb.StringProperty()
-	reciever = ndb.StringProperty()
-	
+	receiver = ndb.StringProperty()
+	user = ndb.StringProperty()
+	timestamp = ndb.DateTimeProperty(auto_now_add=True)
 
 class MainHandler(webapp2.RequestHandler):
 	def get(self):
-
 		template = jinja_environment.get_template('main.html')
 		self.response.write(template.render())
 		 
 
 	def post(self):
 		feed_from_form = self.request.get('Message')
+		receiver_from_form = self.request.get('recpient')
+		user = users.get_current_user()
 		
-		feed_model = text(feed=feed_from_form)
+
+		
+		feed_model = text(feed=feed_from_form, receiver=receiver_from_form, user=user.email())
 		feed_model.put()
+		
 
 		template = jinja_environment.get_template('main_out.html')
 		self.response.write(template.render(
 			{
-				'text': feed_from_form 
+				'feed': feed_from_form,
+				'receiver': receiver_from_form,
+				'user': user
+				
+				 
 			}
 			))
 
@@ -56,8 +65,16 @@ class ContactsHandler(webapp2.RequestHandler):
 
 class ManageHandler(webapp2.RequestHandler):
 	def get(self):
+		user = users.get_current_user()
+		user_email = user.email()
+		list_of_messages = text.query(text.receiver == user_email).order(-text.timestamp).fetch()
+
 		template = jinja_environment.get_template('manage.html')
-		self.response.write(template.render())
+		self.response.write(template.render({
+			'text': list_of_messages
+			}
+			))
+			
 
 class HelpHandler(webapp2.RequestHandler):
 	def get(self):
