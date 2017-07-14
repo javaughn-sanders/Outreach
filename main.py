@@ -22,7 +22,7 @@ class people(ndb.Model):
 class text(ndb.Model):
 	feed = ndb.StringProperty()
 	reciever = ndb.StringProperty()
-	
+	user = ndb.StringProperty()
 
 class MainHandler(webapp2.RequestHandler):
 	def get(self):
@@ -33,14 +33,23 @@ class MainHandler(webapp2.RequestHandler):
 
 	def post(self):
 		feed_from_form = self.request.get('Message')
+		reciever_from_form = self.request.get('recpient')
+		user = users.get_current_user()
 		
-		feed_model = text(feed=feed_from_form)
+
+		
+		feed_model = text(feed=feed_from_form, reciever=reciever_from_form, user=user.email())
 		feed_model.put()
+		
 
 		template = jinja_environment.get_template('main_out.html')
 		self.response.write(template.render(
 			{
-				'text': feed_from_form 
+				'feed': feed_from_form,
+				'reciever': reciever_from_form,
+				'user': user
+				
+				 
 			}
 			))
 
