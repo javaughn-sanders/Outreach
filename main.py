@@ -4,6 +4,7 @@ import urllib
 import json
 import jinja2
 import os
+import logging
 
 from google.appengine.api import users
 from google.appengine.ext import ndb
@@ -17,7 +18,7 @@ jinja_environment = jinja2.Environment(
 class OurUser(ndb.Model):
 	user = users.get_current_user()
 	username = ndb.StringProperty()
-	id = user.user_id()
+	uid = user.user_id()
 
 class People(ndb.Model):
 	name = ndb.StringProperty()
@@ -33,8 +34,11 @@ class Text(ndb.Model):
 class MainHandler(webapp2.RequestHandler):
 	def get(self):
 		user = users.get_current_user()
-		if user.id() != OurUser.query(OurUser.id).fetch(): 
-			self.redirect('/username')
+		user_list = OurUser.query(ndb.GenericProperty('uid') == user.user_id()).fetch()
+		logging.info(user_list)
+		
+		if len(user_list) == 0:
+			self.redirect("/username")
 
 		template = jinja_environment.get_template('main.html')
 		self.response.write(template.render())
@@ -58,10 +62,14 @@ class MainHandler(webapp2.RequestHandler):
 				'feed': feed_from_form,
 				'receiver': receiver_from_form,
 				'user': user
-				
 				 
 			}
 			))
+
+class UsernameHandler(webapp2.RequestHandler):
+	def get(self):
+		template = jinja_environment.get_template('username.html')
+		self.response.write(template.render())
 
 class ContactsHandler(webapp2.RequestHandler):
 	def get(self):
