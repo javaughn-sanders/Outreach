@@ -14,12 +14,12 @@ from google.appengine.ext import ndb
 jinja_environment = jinja2.Environment(
 	loader=jinja2.FileSystemLoader(os.path.dirname(__file__)))
 
-class people(ndb.Model):
+class People(ndb.Model):
 	name = ndb.StringProperty()
 	number = ndb.IntegerProperty()
 	email = ndb.StringProperty()
 
-class text(ndb.Model):
+class Text(ndb.Model):
 	feed = ndb.StringProperty()
 	receiver = ndb.StringProperty()
 	user = ndb.StringProperty()
@@ -29,6 +29,7 @@ class MainHandler(webapp2.RequestHandler):
 	def get(self):
 		template = jinja_environment.get_template('main.html')
 		self.response.write(template.render())
+
 		 
 
 	def post(self):
@@ -38,7 +39,7 @@ class MainHandler(webapp2.RequestHandler):
 		
 
 		
-		feed_model = text(feed=feed_from_form, receiver=receiver_from_form, user=user.email())
+		feed_model =Text(feed=feed_from_form, receiver=receiver_from_form, user=user.email())
 		feed_model.put()
 		
 
@@ -67,11 +68,11 @@ class ManageHandler(webapp2.RequestHandler):
 	def get(self):
 		user = users.get_current_user()
 		user_email = user.email()
-		list_of_messages = text.query(text.receiver == user_email).order(-text.timestamp).fetch()
+		list_of_messages = Text.query(Text.receiver == user_email).order(-Text.timestamp).fetch()
 
 		template = jinja_environment.get_template('manage.html')
 		self.response.write(template.render({
-			'text': list_of_messages
+			'Text': list_of_messages
 			}
 			))
 			
