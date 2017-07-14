@@ -20,7 +20,7 @@
 				</li>
 				<li>
 					<a href="/manage">
-						<img src="/resources/settings-1.png">
+						<img src="/resources/envelope.png">
 					</a>
 				</li>
 				<li>
@@ -41,10 +41,13 @@
 		</div>
 
 		<div id='content'>
-		<!--
-		ADD CONTENT FOR MANAGE HERE DONT MESS WITH THE REST OF THE CODE 
-
-		 -->
+		<h1>Message List</h1>
+		{% for s in text %}
+		<p>{{s['feed']}}</p>
+		<br>
+		<p>{{s['receiver']}}</p>
+		<br>
+		{% endfor %}
 	    </div>	
 	</body>
 </html>
