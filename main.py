@@ -21,10 +21,10 @@ class OurUser(ndb.Model):
 	uid = user.user_id()
 
 class People(ndb.Model):
-	username = ndb.StringProperty()
-	phone_number = ndb.IntegerProperty()
+	name = ndb.StringProperty()
+	number = ndb.IntegerProperty()
 	email = ndb.StringProperty()
-	username = user
+	##username = user
 	
 class Text(ndb.Model):
 	feed = ndb.StringProperty()
@@ -78,16 +78,17 @@ class ContactsHandler(webapp2.RequestHandler):
 		self.response.write(template.render())
 
 	def post(self):
-		username_from_form = self.request.get('Contact_name')
-		phone_number_from_form = self.request.get('Contact_number')
-		email_from_form = self.request.get('Contact_email')
+		username_from_form = self.request.get('contact_name')
+		email_from_form = self.request.get('contact_email')
+		phone_number_from_form = self.request.get('contact_number')
 
-		template = jinja_environment.get_template('contact_imput.html')
+		contact_model = People(name = username_from_form, email = email_from_form, number= phone_number_from_form)
+		contact_model.put()
+
+		template = jinja_environment.get_template('contacts_out.html')
 		self.response.write(template.render(
 			{
-				'username': username_from_form
-				##'phone_number': phone_number_from_form
-				'email': email_from_form
+				'contact': contact_model
 			}))
 
 
