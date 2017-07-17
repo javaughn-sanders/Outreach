@@ -16,14 +16,13 @@ jinja_environment = jinja2.Environment(
 	loader=jinja2.FileSystemLoader(os.path.dirname(__file__)))
 
 class OurUser(ndb.Model):
-	user = users.get_current_user()
+	user = ndb.StringProperty()
 	username = ndb.StringProperty()
-	uid = user.user_id()
+	
 
 class People(ndb.Model):
-	name = ndb.StringProperty()
-	number = ndb.IntegerProperty()
-	email = ndb.StringProperty()
+	userid = ndb.StringProperty()
+	contactname = ndb.StringProperty()
 	##username = user
 	
 class Text(ndb.Model):
@@ -35,7 +34,7 @@ class Text(ndb.Model):
 class MainHandler(webapp2.RequestHandler):
 	def get(self):
 		user = users.get_current_user()
-		user_list = OurUser.query(ndb.GenericProperty('uid') == user.user_id()).fetch()
+		user_list = OurUser.query(OurUser.user == user.user_id()).fetch()
 		logging.info(user_list)
 		
 		if len(user_list) == 0:
@@ -51,9 +50,11 @@ class MainHandler(webapp2.RequestHandler):
 		receiver_from_form = self.request.get('recpient')
 		user = users.get_current_user()
 		
-
+		username = OurUser.query(OurUser.user == user.user_id()).fetch()[0].username
+		logging.info(username)
 		
-		feed_model = Text(feed=feed_from_form, receiver=receiver_from_form, user=user.email())
+		
+		feed_model = Text(feed=feed_from_form, receiver=receiver_from_form, user=user.user_id())
 		feed_model.put()
 		
 
@@ -62,7 +63,7 @@ class MainHandler(webapp2.RequestHandler):
 			{
 				'feed': feed_from_form,
 				'receiver': receiver_from_form,
-				'user': user
+				'user': username
 				 
 			}
 			))
@@ -71,6 +72,20 @@ class UsernameHandler(webapp2.RequestHandler):
 	def get(self):
 		template = jinja_environment.get_template('username.html')
 		self.response.write(template.render())
+
+	def post(self):
+		user = users.get_current_user()
+
+		u_id = user.user_id()
+		username = self.request.get('username')
+
+		ouruser_model = OurUser(user = u_id, username = username)
+		ouruser_model.put()
+
+		self.redirect("/")
+
+
+
 
 class ContactsHandler(webapp2.RequestHandler):
 	def get(self):
@@ -90,7 +105,10 @@ class ContactsHandler(webapp2.RequestHandler):
 		template = jinja_environment.get_template('contacts_out.html')
 		self.response.write(template.render(
 			{
-				'contact': contact_model
+				'contact': contact_model,
+				'username': username_from_form,
+				'email':email_from_form,
+				'number': phone_number_from_form,
 			}))
 
 
@@ -99,7 +117,7 @@ class ManageHandler(webapp2.RequestHandler):
 	def get(self):
 		user = users.get_current_user()
 		user_email = user.email()
-		list_of_messages = Text.query(Text.receiver == user_email).order(-Text.timestamp).fetch()
+		list_of_messages = Text.query(Text.user == user.user_id()).order(-Text.timestamp).fetch()
 
 		template = jinja_environment.get_template('manage.html')
 		self.response.write(template.render({
