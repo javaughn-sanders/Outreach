@@ -82,6 +82,8 @@ class ContactsHandler(webapp2.RequestHandler):
 		email_from_form = self.request.get('contact_email')
 		phone_number_from_form = self.request.get('contact_number')
 
+		phone_number_from_form = int(phone_number_from_form)
+
 		contact_model = People(name = username_from_form, email = email_from_form, number= phone_number_from_form)
 		contact_model.put()
 

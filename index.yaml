@@ -10,6 +10,12 @@ indexes:
 # automatically uploaded to the admin console when you next deploy
 # your application using appcfg.py.
 
+- kind: Text
+  properties:
+  - name: receiver
+  - name: timestamp
+    direction: desc
+
 - kind: text
   properties:
   - name: receiver
