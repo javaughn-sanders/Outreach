@@ -16,9 +16,9 @@ jinja_environment = jinja2.Environment(
 	loader=jinja2.FileSystemLoader(os.path.dirname(__file__)))
 
 class OurUser(ndb.Model):
-	user = users.get_current_user()
+	user = ndb.StringProperty()
 	username = ndb.StringProperty()
-	uid = user.user_id()
+	
 
 class People(ndb.Model):
 	name = ndb.StringProperty()
@@ -34,12 +34,12 @@ class Text(ndb.Model):
 
 class MainHandler(webapp2.RequestHandler):
 	def get(self):
-#		user = users.get_current_user()
-#		user_list = OurUser.query(ndb.GenericProperty('uid') == user.user_id()).fetch()
-#		logging.info(user_list)
+		user = users.get_current_user()
+		user_list = OurUser.query(OurUser.user == user.user_id()).fetch()
+		logging.info(user_list)
 		
-#		if len(user_list) == 0:
-#			self.redirect("/username")
+		if len(user_list) == 0:
+			self.redirect("/username")
 
 		template = jinja_environment.get_template('main.html')
 		self.response.write(template.render())
@@ -71,6 +71,20 @@ class UsernameHandler(webapp2.RequestHandler):
 	def get(self):
 		template = jinja_environment.get_template('username.html')
 		self.response.write(template.render())
+
+	def post(self):
+		user = users.get_current_user()
+
+		u_id = user.user_id()
+		username = self.request.get('username')
+
+		ouruser_model = OurUser(user = u_id, username = username)
+		ouruser_model.put()
+
+		self.redirect("/")
+
+
+
 
 class ContactsHandler(webapp2.RequestHandler):
 	def get(self):
