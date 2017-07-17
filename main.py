@@ -21,10 +21,9 @@ class OurUser(ndb.Model):
 	
 
 class People(ndb.Model):
-	name = ndb.StringProperty()
-	number = ndb.IntegerProperty()
-	email = ndb.StringProperty()
-	
+	userid = ndb.StringProperty()
+	contactname = ndb.StringProperty()
+	##username = user
 	
 class Text(ndb.Model):
 	feed = ndb.StringProperty()
