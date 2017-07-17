@@ -34,12 +34,12 @@ class Text(ndb.Model):
 
 class MainHandler(webapp2.RequestHandler):
 	def get(self):
-		user = users.get_current_user()
-		user_list = OurUser.query(ndb.GenericProperty('uid') == user.user_id()).fetch()
-		logging.info(user_list)
+#		user = users.get_current_user()
+#		user_list = OurUser.query(ndb.GenericProperty('uid') == user.user_id()).fetch()
+#		logging.info(user_list)
 		
-		if len(user_list) == 0:
-			self.redirect("/username")
+#		if len(user_list) == 0:
+#			self.redirect("/username")
 
 		template = jinja_environment.get_template('main.html')
 		self.response.write(template.render())
