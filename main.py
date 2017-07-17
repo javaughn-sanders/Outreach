@@ -24,7 +24,7 @@ class People(ndb.Model):
 	name = ndb.StringProperty()
 	number = ndb.IntegerProperty()
 	email = ndb.StringProperty()
-	##username = user
+	
 	
 class Text(ndb.Model):
 	feed = ndb.StringProperty()
@@ -51,9 +51,11 @@ class MainHandler(webapp2.RequestHandler):
 		receiver_from_form = self.request.get('recpient')
 		user = users.get_current_user()
 		
-
+		username = OurUser.query(OurUser.user == user.user_id()).fetch()[0].username
+		logging.info(username)
 		
-		feed_model = Text(feed=feed_from_form, receiver=receiver_from_form, user=user.email())
+		
+		feed_model = Text(feed=feed_from_form, receiver=receiver_from_form, user=user.user_id())
 		feed_model.put()
 		
 
@@ -62,7 +64,7 @@ class MainHandler(webapp2.RequestHandler):
 			{
 				'feed': feed_from_form,
 				'receiver': receiver_from_form,
-				'user': user
+				'user': username
 				 
 			}
 			))
@@ -116,7 +118,7 @@ class ManageHandler(webapp2.RequestHandler):
 	def get(self):
 		user = users.get_current_user()
 		user_email = user.email()
-		list_of_messages = Text.query(Text.receiver == user_email).order(-Text.timestamp).fetch()
+		list_of_messages = Text.query(Text.user == user.user_id()).order(-Text.timestamp).fetch()
 
 		template = jinja_environment.get_template('manage.html')
 		self.response.write(template.render({

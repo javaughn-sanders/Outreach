@@ -16,6 +16,12 @@ indexes:
   - name: timestamp
     direction: desc
 
+- kind: Text
+  properties:
+  - name: user
+  - name: timestamp
+    direction: desc
+
 - kind: text
   properties:
   - name: receiver
