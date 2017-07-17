@@ -90,7 +90,10 @@ class ContactsHandler(webapp2.RequestHandler):
 		template = jinja_environment.get_template('contacts_out.html')
 		self.response.write(template.render(
 			{
-				'contact': contact_model
+				'contact': contact_model,
+				'username': username_from_form,
+				'email':email_from_form,
+				'number': phone_number_from_form,
 			}))
 
 
