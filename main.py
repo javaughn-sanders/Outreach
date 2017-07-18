@@ -38,10 +38,11 @@ class MainHandler(webapp2.RequestHandler):
 		logging.info(user_list)
 		
 		if len(user_list) == 0:
-			self.redirect("/username")
 
-		template = jinja_environment.get_template('main.html')
-		self.response.write(template.render())
+			self.redirect("/username")
+		else:
+			template = jinja_environment.get_template('main.html')
+			self.response.write(template.render())
 
 		 
 
@@ -70,6 +71,13 @@ class MainHandler(webapp2.RequestHandler):
 
 class UsernameHandler(webapp2.RequestHandler):
 	def get(self):
+		user = users.get_current_user()
+		user_list = OurUser.query(OurUser.user == user.user_id()).fetch()
+
+		if len(user_list) != 0 :
+
+			self.redirect('/')
+
 		template = jinja_environment.get_template('username.html')
 		self.response.write(template.render())
 
@@ -79,10 +87,12 @@ class UsernameHandler(webapp2.RequestHandler):
 		u_id = user.user_id()
 		username = self.request.get('username')
 
+		logging.info(username)
+
 		ouruser_model = OurUser(user = u_id, username = username)
 		ouruser_model.put()
 
-		self.redirect("/")
+		self.redirect('/')
 
 
 
