@@ -41,27 +41,12 @@
 		</div>
 
 		<div id='content'>
-			<table>
-			  <tr>
-			    <th>Name</th>
-			    <th>Email</th> 
-			    <th>phone</th>
-			  </tr>
-			  <tr>
-			    <td>{{username}}</td>
-			    <td></td>
-			    <td></td>
-			  </tr>
-			  <tr>
-			    <td></td>
-			    <td></td>
-			    <td></td>
-			  </tr>
-			  <tr>
-			    <td></td>
-			    <td></td>
-			    <td></td>
-			  </tr>
-			</table>
+		<h3>Contacts</h3>
+		{% for y in contact %}
+		<ul>
+			<li>{{y['contactname']}}</li>
+		{% endfor %}
+
+		</ul>
 	</body>
 </html>
