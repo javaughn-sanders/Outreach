@@ -11,20 +11,17 @@ from google.appengine.ext import ndb
 
 #Icons designed by Gregor Cresnar from Flaticon
 
-
 jinja_environment = jinja2.Environment(
 	loader=jinja2.FileSystemLoader(os.path.dirname(__file__)))
 
 class OurUser(ndb.Model):
 	user = ndb.StringProperty()
-	username = ndb.StringProperty()
-	
+	username = ndb.StringProperty()	
 
 class People(ndb.Model):
 	user = ndb.StringProperty()
 	contactname = ndb.StringProperty()
-	
-	
+		
 class Text(ndb.Model):
 	feed = ndb.StringProperty()
 	receiver = ndb.StringProperty()
@@ -37,14 +34,13 @@ class MainHandler(webapp2.RequestHandler):
 		user_list = OurUser.query(OurUser.user == user.user_id()).fetch()
 		logging.info(user_list)
 		
-		if len(user_list) == 0:
+		x = self.request.get("ignorecheck")
+		if len(user_list) == 0 and not x:
 
 			self.redirect("/username")
 		else:
 			template = jinja_environment.get_template('main.html')
 			self.response.write(template.render())
-
-		 
 
 	def post(self):
 		feed_from_form = self.request.get('Message')
@@ -71,12 +67,6 @@ class MainHandler(webapp2.RequestHandler):
 
 class UsernameHandler(webapp2.RequestHandler):
 	def get(self):
-		user = users.get_current_user()
-		user_list = OurUser.query(OurUser.user == user.user_id()).fetch()
-
-		if len(user_list) != 0 :
-
-			self.redirect('/')
 
 		template = jinja_environment.get_template('username.html')
 		self.response.write(template.render())
@@ -92,10 +82,7 @@ class UsernameHandler(webapp2.RequestHandler):
 		ouruser_model = OurUser(user = u_id, username = username)
 		ouruser_model.put()
 
-		self.redirect('/')
-
-
-
+		self.redirect('/?ignorecheck=true')
 
 class ContactsHandler(webapp2.RequestHandler):
 	def get(self):
@@ -108,8 +95,6 @@ class ContactsHandler(webapp2.RequestHandler):
 		user = users.get_current_user()
 		
 		username = OurUser.query(OurUser.user == user.user_id()).fetch()[0].username	
-
-		
 
 		test = OurUser.query(OurUser.username == username_from_form).fetch()
 
@@ -130,8 +115,6 @@ class ContactsHandler(webapp2.RequestHandler):
 					
 				}))
 
-
-
 class ManageHandler(webapp2.RequestHandler):
 	def get(self):
 		user = users.get_current_user()
@@ -142,8 +125,7 @@ class ManageHandler(webapp2.RequestHandler):
 		self.response.write(template.render({
 			'Text': list_of_messages
 			}
-			))
-			
+			))	
 
 class HelpHandler(webapp2.RequestHandler):
 	def get(self):
@@ -168,7 +150,6 @@ class LoginHandler(webapp2.RequestHandler):
 			greeting = '<a href="{}">Sign in</a>'.format(login_url)
 
 		self.response.write('<html><body>{}</body></html>'.format(greeting))
-
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
