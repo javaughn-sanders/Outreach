@@ -23,16 +23,6 @@
 						<img src="/resources/envelope.png">
 					</a>
 				</li>
-				<li>
-					<a href="/settings">
-						<img src="/resources/settings.png">
-					</a>
-				</li>
-				<li>
-					<a href="/help">
-						<img src="/resources/book.png">
-					</a>
-				</li>
 			</ul>
 		</div>
 
@@ -41,12 +31,27 @@
 		</div>
 
 		<div id='content'>
-		<h3>Contacts</h3>
-		{% for y in contact %}
-		<ul>
-			<li>{{y['contactname']}}</li>
-		{% endfor %}
-
-		</ul>
+			<table>
+			  <tr>
+			    <th>Name</th>
+			    <th>Email</th> 
+			    <th>phone</th>
+			  </tr>
+			  <tr>
+			    <td>{{username}}</td>
+			    <td></td>
+			    <td></td>
+			  </tr>
+			  <tr>
+			    <td></td>
+			    <td></td>
+			    <td></td>
+			  </tr>
+			  <tr>
+			    <td></td>
+			    <td></td>
+			    <td></td>
+			  </tr>
+			</table>
 	</body>
 </html>
