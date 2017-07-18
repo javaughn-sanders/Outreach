@@ -21,9 +21,9 @@ class OurUser(ndb.Model):
 	
 
 class People(ndb.Model):
-	userid = ndb.StringProperty()
+	user = ndb.StringProperty()
 	contactname = ndb.StringProperty()
-	##username = user
+	
 	
 class Text(ndb.Model):
 	feed = ndb.StringProperty()
@@ -94,22 +94,31 @@ class ContactsHandler(webapp2.RequestHandler):
 
 	def post(self):
 		username_from_form = self.request.get('contact_name')
-		email_from_form = self.request.get('contact_email')
-		phone_number_from_form = self.request.get('contact_number')
+		
+		user = users.get_current_user()
+		
+		username = OurUser.query(OurUser.user == user.user_id()).fetch()[0].username	
 
-		phone_number_from_form = int(phone_number_from_form)
+		
 
-		contact_model = People(name = username_from_form, email = email_from_form, number= phone_number_from_form)
-		contact_model.put()
+		test = OurUser.query(OurUser.username == username_from_form).fetch()
 
-		template = jinja_environment.get_template('contacts_out.html')
-		self.response.write(template.render(
-			{
-				'contact': contact_model,
-				'username': username_from_form,
-				'email':email_from_form,
-				'number': phone_number_from_form,
-			}))
+		logging.info(test)
+
+		if len(test) == 0 :
+
+			 template1 = jinja_environment.get_template('nocontacts_out.html')
+			 self.response.write(template1.render())
+		else:
+			contact_model = People(contactname = username_from_form, user = username)
+			contact_model.put()
+
+			template2 = jinja_environment.get_template('contacts_out.html')
+			self.response.write(template2.render(
+				{
+					'contact': contact_model,
+					
+				}))
 
 
 
