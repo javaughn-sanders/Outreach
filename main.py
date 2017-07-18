@@ -100,6 +100,9 @@ class ContactsHandler(webapp2.RequestHandler):
 
 		logging.info(test)
 
+		user = users.get_current_user()
+		list_of_contacts = People.query(People.user == user.user_id()).fetch()
+
 		if len(test) == 0 :
 
 			 template1 = jinja_environment.get_template('nocontacts_out.html')
@@ -108,10 +111,12 @@ class ContactsHandler(webapp2.RequestHandler):
 			contact_model = People(contactname = username_from_form, user = username)
 			contact_model.put()
 
+
+
 			template2 = jinja_environment.get_template('contacts_out.html')
 			self.response.write(template2.render(
 				{
-					'contact': contact_model,
+					'contact': list_of_contacts,
 					
 				}))
 
