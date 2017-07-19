@@ -28,9 +28,9 @@ h3 {
     float: left; 
 }
 #content p{
-	font-size: 25px;
+	
 	text-align: left;
-	font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
+	
 }
 
 
@@ -108,11 +108,9 @@ p {
 #form {
 	margin-left: auto;
 	margin-right: auto;
-<<<<<<< HEAD
+
 	font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
-=======
-	
->>>>>>> d6d09d48c964ac3c4cd10ff3af532bf3e839a8c5
+
 }
 
 ul {
@@ -130,16 +128,7 @@ li:hover {
     transition: all 0.3s ease;
     font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
 
-
-#outreachGif {
-	position: fixed;
-    bottom: 0;
-    right: 0;
-    margin-left: auto;
-    margin-right: auto;
-	 
-
-
+	
 }
 
 input[type=text] {
@@ -149,3 +138,6 @@ input[type=text] {
     box-sizing: border-box;
 }
 
+#content #From{
+	font-size: 5;
+}

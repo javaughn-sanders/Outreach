@@ -33,10 +33,10 @@
 		<h1>Message List</h1>
 		{% for s in Text %}
 
-		<p><font color="black">From: </font></p><p>{{s['receiver']}}</p>
-		<br>
-		<p><font color="black">Message: </font></p><p>{{s['feed']}}</p>
-		<br>
+		<p id="From"><font color="black">From: </font>{{s['receiver']}}</p>
+		
+		<p id="Message"><font color="black">Message: </font>{{s['feed']}}</p>
+		
 		{% endfor %}
 	    </div>	
 	</body>
