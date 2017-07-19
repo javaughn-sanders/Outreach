@@ -65,6 +65,22 @@ class MainHandler(webapp2.RequestHandler):
 			}
 			))
 
+class ManageHandler(webapp2.RequestHandler):
+	def get(self):
+		user = users.get_current_user()
+		
+		username = OurUser.query(OurUser.user == user.user_id()).fetch()[0].username
+
+		list_of_messages = Text.query(Text.receiver == username).order(-Text.timestamp).fetch()
+
+		logging.info(list_of_messages)
+
+		template = jinja_environment.get_template('manage.html')
+		self.response.write(template.render({
+			'Text': list_of_messages
+			}
+			))		
+
 class UsernameHandler(webapp2.RequestHandler):
 	def get(self):
 
@@ -120,17 +136,7 @@ class ContactsHandler(webapp2.RequestHandler):
 					
 				}))
 
-class ManageHandler(webapp2.RequestHandler):
-	def get(self):
-		user = users.get_current_user()
-		user_email = user.email()
-		list_of_messages = Text.query(Text.user == user.user_id()).order(-Text.timestamp).fetch()
-
-		template = jinja_environment.get_template('manage.html')
-		self.response.write(template.render({
-			'Text': list_of_messages
-			}
-			))	
+	
 
 class HelpHandler(webapp2.RequestHandler):
 	def get(self):
