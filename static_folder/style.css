@@ -1,6 +1,7 @@
 html, body {
 	margin: 0;
 	background-color: lightgrey;
+	font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
 }
 
 li img {
@@ -8,11 +9,13 @@ li img {
 	padding-bottom: 95px;
 	height: 35px;
 	width: 35px;
+	font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
 }
 
 h3 {
 	text-align: center;
 	padding: 10px;
+	font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
 } 
 
 #topbar {
@@ -27,6 +30,7 @@ h3 {
 #content p{
 	font-size: 25px;
 	text-align: left;
+	font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
 }
 
 
@@ -37,6 +41,7 @@ p {
 	margin-bottom: 15px;
 	font-size: 30px;
 	text-align: center;
+	font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
 }
 
 #sidebar {
@@ -48,6 +53,7 @@ p {
 	margin-top: 62px;
 	text-align: center;
 	background-color: grey;
+	font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
 	
 }
 
@@ -84,6 +90,7 @@ p {
 	display: block;
     margin-left: auto;
     margin-right: auto;
+    font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
 }
 
 
@@ -91,12 +98,14 @@ p {
 #form {
 	margin-left: auto;
 	margin-right: auto;
+	font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
 }
 
 ul {
     list-style-type: none;
     margin: 0;
     padding-left: 0px;
+    font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
     
 }
 
@@ -105,7 +114,7 @@ li:hover {
     background-color: #555;
     color: white;
     transition: all 0.3s ease;
-}
+    font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
 
 
 #outreachGif {
