@@ -2,6 +2,7 @@ html, body {
 	margin: 0;
 	background-color: #9EB3C2;
 	font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
+
 }
 
 li img {
@@ -138,6 +139,31 @@ input[type=text] {
     box-sizing: border-box;
 }
 
+<<<<<<< HEAD
+
+
+
+
+
+
+
+
+@keyframes bounceIn {
+  0% {
+    transform: scale(0.1);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+=======
 #content #From{
 	font-size: 5;
 }
+>>>>>>> bc3304fee71d27b74a1f89f1f48ea1a09b1fe80d
