@@ -111,28 +111,17 @@ class ContactsHandler(webapp2.RequestHandler):
 		
 		user = users.get_current_user()
 		
-<<<<<<< HEAD
+
 			
 
-		test = OurUser.query(OurUser.username == username_from_form).fetch()[0]
-=======
-		
->>>>>>> 9d1a19ffa7c6cc6cddb9ec04a77daf7905ff7247
+		test = OurUser.query(OurUser.username == username_from_form).fetch()
 
-		new_contact = People(user =  user.user_id(),contactname=test.user)
-		new_contact.put()
 
 		logging.info(test)
 
 		user = users.get_current_user()
-<<<<<<< HEAD
-		list_of_contacts = People.query(People.user == str(user.user_id())).fetch()
 
-=======
-		
->>>>>>> 9d1a19ffa7c6cc6cddb9ec04a77daf7905ff7247
-
-		if len(list_of_contacts) == 0 :
+		if len(test) == 0 :
 
 			 template1 = jinja_environment.get_template('nocontacts_out.html')
 			 self.response.write(template1.render())
