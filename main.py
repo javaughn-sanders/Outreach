@@ -102,8 +102,20 @@ class UsernameHandler(webapp2.RequestHandler):
 
 class ContactsHandler(webapp2.RequestHandler):
 	def get(self):
-		template = jinja_environment.get_template('contacts.html')
-		self.response.write(template.render())
+		user = users.get_current_user()
+
+		list_of_contacts = People.query(People.user == str(user.user_id())).fetch()
+
+		logging.info(user.user_id())
+
+		list_of_contacts = [OurUser.query(OurUser.user == p.user).get() for p in list_of_contacts]
+
+		template2 = jinja_environment.get_template('contacts.html')
+		self.response.write(template2.render(
+				{
+					'contact': list_of_contacts,
+					
+				}))
 
 	def post(self):
 		username_from_form = self.request.get('contact_name')

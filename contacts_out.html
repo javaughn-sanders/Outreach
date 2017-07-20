@@ -31,13 +31,14 @@
 		</div>
 
 		<div id='content'>
-			<table>
-			  <tr>
-			    <th>Name</th>
-			  </tr>
-			  <tr>
-			    <td>{{contact}}</td> 
-			  </tr>
-			</table>
+		<h1>Contacts</h1>
+		<ul>
+			{% for i in contact %}
+		</ul>
+			{{i['username']}}
+			<br>
+			{% endfor %}
+			
+			
 	</body>
 </html>
