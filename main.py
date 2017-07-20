@@ -134,6 +134,8 @@ class ContactsHandler(webapp2.RequestHandler):
 
 			list_of_contacts = [OurUser.query(OurUser.user == p.user).get() for p in list_of_contacts]
 
+			logging.info(list_of_contacts)
+
 			template2 = jinja_environment.get_template('contacts_out.html')
 			self.response.write(template2.render(
 				{

@@ -1,6 +1,6 @@
 html, body {
 	margin: 0;
-	background-color: #E8E8E8;
+	background-color: #ffffff;
 	font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
 
 }
@@ -10,9 +10,14 @@ li img {
 	padding-bottom: 95px;
 	height: 35px;
 	width: 35px;
+	font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
 }
 
-
+h3 {
+	text-align: center;
+	padding: 10px;
+	font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
+} 
 
 #topbar {
 	position: fixed;
@@ -40,6 +45,7 @@ p {
 	margin-bottom: 15px;
 	font-size: 30px;
 	text-align: center;
+	font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
 }
 
 #sidebar {
@@ -50,8 +56,8 @@ p {
 	float: left;
 	margin-top: 62px;
 	text-align: center;
-	background-color: #497DAA;
-	
+	background-color: #FF4444;
+	font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
 	
 }
 
@@ -74,7 +80,7 @@ p {
     box-sizing: border-box;
     border: 2px solid #101114;
     border-radius: 4px;
-    background-color: #f8f8f8;
+    background-color: #FF4444;
 
     resize: none;
 
@@ -107,7 +113,8 @@ p {
 	display: block;
     margin-left: auto;
     margin-right: auto;
-   }
+    font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
+}
 
 
 
@@ -117,24 +124,26 @@ p {
 #form {
 	margin-left: auto;
 	margin-right: auto;
+
+	font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
+
 }
 
 ul {
     list-style-type: none;
     margin: 0;
     padding-left: 0px;
-   
+    font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
     
 }
 
-.active{
-	background-color:#BCCFE0; 
-}
 
 li:hover {
-    background-color: #22394E;
+    background-color: #101114;
     color: #0D1F22;
     transition: all 0.3s ease;
+    font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
+
 	
 }
 
@@ -145,6 +154,24 @@ input[type=text] {
     box-sizing: border-box;
 }
 
-#content p, h1{
-	padding-left: 10px;
+
+
+
+@keyframes bounceIn {
+  0% {
+    transform: scale(0.1);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+#content #From{
+	font-size: 5;
+
 }

@@ -18,24 +18,25 @@
 						<img src="/resources/avatar.png">
 					</a>
 				</li>
-				<li>
+				<li class="active">
 					<a href="/manage">
 						<img src="/resources/envelope.png">
 					</a>
+				</li>	
 			</ul>
 		</div>
 
 		<div id='topbar'>
-			<p> <img src= "/resources/namegif.gif" > </p>
+			<p>OutREACH</p>
 		</div>
 
 		<div id='content'>
 		<h1>Message List</h1>
 		{% for s in Text %}
 
-		<p id="From"><font color="black">From: </font>{{s['receiver']}}</p>
+		<p id="From"><font color="black">From: {{s['receiver']}}</font></p>
 		
-		<p id="Message"><font color="black">Message: </font>{{s['feed']}}</p>
+		<p id="Message"><font color="black">Message: {{s['feed']}}</font></p>
 		
 		{% endfor %}
 	    </div>	
